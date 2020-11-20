@@ -1,0 +1,78 @@
+/* Select */
+.select-wrapper input.select-dropdown {
+	border: 1px solid #ced4da;
+	height: 2.5rem;
+	line-height: 2.5rem;
+}
+
+input.select-dropdown.dropdown-trigger {
+	font-family: 'Samim';
+	color: #343a40;
+}
+
+.select-wrapper .caret {
+	fill: rgba(0, 0, 0, 0.57);
+}
+
+.select-wrapper + label {
+	top: -36px;
+	font-size: 0.875rem;
+}
+
+.dropdown-content li > a, .dropdown-content li > span {
+	color: #9e9e9e;
+}
+
+.select-wrapper input.select-dropdown:focus {
+	border-bottom: 1px solid #ced4da;
+	box-shadow: 0 0 2px  #2196F3;
+	-webkit-box-shadow: 0 0 2px  #2196F3;
+}
+
+/* Inputs */
+input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea {
+	border: 1px solid #ced4da;
+	height: 2.5rem;
+}
+
+input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):focus:not([readonly]), input[type=password]:not(.browser-default):focus:not([readonly]), input[type=email]:not(.browser-default):focus:not([readonly]), input[type=url]:not(.browser-default):focus:not([readonly]), input[type=time]:not(.browser-default):focus:not([readonly]), input[type=date]:not(.browser-default):focus:not([readonly]), input[type=datetime]:not(.browser-default):focus:not([readonly]), input[type=datetime-local]:not(.browser-default):focus:not([readonly]), input[type=tel]:not(.browser-default):focus:not([readonly]), input[type=number]:not(.browser-default):focus:not([readonly]), input[type=search]:not(.browser-default):focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+	border-bottom: 1px solid #ced4da;
+	box-shadow: 0 0 2px  #2196F3;
+	-webkit-box-shadow: 0 0 2px  #2196F3;
+}
+
+/* Buttons */
+.btn:not(:disabled):not(.disabled) {
+	font-family: 'Samim';
+}
+
+/* Chips */
+.chip {
+	background: silver;
+}
+
+/* footer */
+body {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+main {
+	flex: 1 0 auto;
+}
+
+
+form .form-group{
+	margin: auto 8px;
+}
+
+.form-control{
+	background-color: transparent;
+}
+
+
+[type="checkbox"].filled-in:checked+span:not(.lever):after {
+	border: 2px solid #E040FB;
+	background-color: #E040FB;
+}
