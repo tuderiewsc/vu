@@ -18,9 +18,6 @@
 						<div class="form-group col-md-5 col-sm-10 required">
 							<label for="password">پسورد</label>
 							<input type="password" class="form-control" id="password" v-model="password">
-							<span class="invalid-feedback" role="alert">
-								<strong>متن خطا</strong>
-							</span>
 						</div>
 					</div>
 

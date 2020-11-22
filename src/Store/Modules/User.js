@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import {router} from '../../main';
+import Swal from 'sweetalert2';
 
 const state = {
   UserFullName: '',
@@ -13,6 +14,9 @@ const getters = {
   },
   IsUserAuthenticated(state) {
     return state.IsUserAuthenticated;
+  },
+  GetCookieName(state){
+    return state.GetCookieName;
   }
 };
 
@@ -41,7 +45,7 @@ const actions = {
     .then(response => {
       if (response.status == 200) {
         console.log(response);
-        alert("ثبت نام با موفقیت انجام شد");
+        Swal.fire('ثبت نام موفق', '', 'info');
         router.push('/login');
       }
       //console.log(response);
@@ -53,25 +57,51 @@ const actions = {
     Vue.http.post('user/login', loginData).then(response => {
       console.log(response);
       if (response.body.result == "nodata") {
-        alert('کاربری با مشخصات وارد شده یافت نشد');
+        Swal.fire('کاربری با مشخصات وارد شده یافت نشد', '', 'error');
       }else if(response.body.result == "validation_error"){
-        alert(response.body.err_text);
+        Swal.fire(response.body.err_text, '', 'error');
       }
 
       if (response.body.result == "Done") {
         context.commit("SetAuthCookie", response);
         context.commit("SetUserFullName", response.body.user_name);
         context.commit("SetUserAuthenticated", true);
-        router.push('/dashboard');
-      }
+        Swal.fire({
+          title: 'ورود موفق',
+          icon: 'success',
+          confirmButtonText: 'باشه'
+        });
+//         Swal.fire({
+//           title: 'Are you sure?',
+//           text: 'You will not be able to recover this imaginary file!',
+//           icon: 'warning',
+//           showCancelButton: true,
+//           confirmButtonText: 'Yes, delete it!',
+//           cancelButtonText: 'No, keep it'
+//         }).then((result) => {
+//           if (result.value) {
+//             Swal.fire(
+//               'Deleted!',
+//               'Your imaginary file has been deleted.',
+//               'success'
+//               )
+//   // For more information about handling dismissals please visit
+//   // https://sweetalert2.github.io/#handling-dismissals
+// } else if (result.dismiss === Swal.DismissReason.cancel) {
+//   Swal.fire(
+//     'Cancelled',
+//     'Your imaginary file is safe :)',
+//     'error'
+//     )
+// }
+// })
+router.push('/dashboard');
+}
 
-    });
+});
   },
   CheckForLogin(context , Filter) {
-    if (Vue.cookie.get('UserToken')) {
-      //context.commit("SetUserFullName", response.body.user_name);
-      //context.commit("SetUserAuthenticated", true);
-
+    if (Vue.cookie.get(this.CookieName)) {
       Vue.http.get('user/loginCheck',{
         params: {
           user_id: Filter.user_id

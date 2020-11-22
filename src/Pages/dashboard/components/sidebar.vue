@@ -4,7 +4,7 @@
 			<figure>
 				<img src="/src/assets/images/male-avatar.png" alt="">
 			</figure>
-			<p><strong>admin</strong></p>
+			<p><strong>{{ UserFullName }}</strong></p>
 		</div>
 		<ul class="collapsible">
 			<li>
@@ -40,3 +40,14 @@
 		</ul>
 	</div>
 </template>
+
+
+<script>
+export default {
+	computed: {
+		UserFullName() {
+			return this.$store.getters.GetUserFullName;
+		}
+	}
+};
+</script>

@@ -588,6 +588,7 @@ ul#mobile-demo li a {
   color: #17a2b8;
 }
 .form_content form .form-row .invalid-feedback {
+  display: block;
   text-align: right;
   padding: 0 2px;
   margin: 8px auto;

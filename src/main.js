@@ -39,13 +39,28 @@ export const router = new VueRouter({
 	}
 });
 
+
 router.beforeEach((to, from, next) => {
- if (to.name === 'dash' && !Vue.cookie.get('UserToken')) {
- 	next({ name: 'home' });
- } else{
- 	next();
- }
- });
+	if (to.name != undefined) {
+		if (to.name.includes('dash') && !Vue.cookie.get('UserToken')) {
+			next({ name: 'home' });
+		} else{
+			next();
+		}
+	}
+	next();
+});
+
+
+Vue.mixin({
+	data: function() {
+		return {
+			get CookieName() {
+				return "UserToken";
+			}
+		}
+	}
+})
 
 new Vue({
 	el: '#app',

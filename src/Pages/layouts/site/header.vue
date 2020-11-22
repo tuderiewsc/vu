@@ -23,8 +23,8 @@
         </a>
         <ul class="left hide-on-med-and-down">
           <div v-if="IsUserAuthenticated">
-            <li class="not_link">امروز : 25 اسفند 1399</li>
-            <li class="not_link">سلام {{ UserFullName  }}</li>
+            <li class="not_link mx-1">امروز : {{ new Date().toISOString().slice(0,10) }}</li>
+            <li class="not_link mx-1">سلام {{ UserFullName  }}</li>
             <li class="navitem mr-3"><a v-on:click="SignOutUser()">خروج</a></li>
           </div>
           <div v-else>
@@ -44,8 +44,6 @@
           <router-link tag="li" class="navitem" to="/dashboard" active-class="active" exact>
             <a>پنل کاربری</a>
           </router-link>
-          <!-- Dropdown Trigger -->
-          <li class="dropdown"><a class="dropdown-trigger" href="#!" data-target="dropdown1">دراپ داون<i class="material-icons left">arrow_drop_down</i></a></li>
         </ul>
       </div>
     </nav>
@@ -75,13 +73,13 @@ export default {
   methods: {
     CheckForLogin() {
       const userId = {
-        'user_id' : Vue.cookie.get('UserToken')
+        'user_id' : Vue.cookie.get(this.CookieName)
       };
       this.$store.dispatch("CheckForLogin" , userId);
     },
     SignOutUser() {
       const userId = {
-        'user_id' : Vue.cookie.get('UserToken')
+        'user_id' : Vue.cookie.get(this.CookieName)
       };
       this.$store.dispatch("SignOutUser" , userId);
     }

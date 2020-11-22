@@ -1,8 +1,5 @@
-//import Home from './Pages/home/home.vue';
-import Register from './Pages/auth/register.vue';
-import Login from './Pages/auth/login.vue';
-import Dashboard from './Pages/dashboard/dashboard.vue';
 import NotFound from './Pages/404.vue';
+import AddOrder from './Pages/dashboard/orders/addorder.vue';
 
 
 /* Lazy loading  */
@@ -10,6 +7,21 @@ import NotFound from './Pages/404.vue';
 var Home = resolve => {
 	require.ensure(['./Pages/home/home.vue'], () => {
 		resolve(require('./Pages/home/home.vue'));
+	});
+};
+var Register = resolve => {
+	require.ensure(['./Pages/auth/register.vue'], () => {
+		resolve(require('./Pages/auth/register.vue'));
+	});
+};
+var Login = resolve => {
+	require.ensure(['./Pages/auth/login.vue'], () => {
+		resolve(require('./Pages/auth/login.vue'));
+	});
+};
+var Dashboard = resolve => {
+	require.ensure(['./Pages/dashboard/dashboard.vue'], () => {
+		resolve(require('./Pages/dashboard/dashboard.vue'));
 	});
 };
 
@@ -34,6 +46,11 @@ export const Routes = [
 	path: '/dashboard',
 	component: Dashboard,
 	name: 'dash'
+},
+{
+	path: '/dashboard/orders/add',
+	component: AddOrder,
+	name: 'dash_add_order'
 },
 {
 	path:'/404',
