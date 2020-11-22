@@ -20,7 +20,7 @@ const mutations = {
   SetAuthCookie(state, loginResult) {
     Vue.cookie.set(
       loginResult.body.token_name,
-      null,
+      loginResult.body.token_value,
       3,null,null,true,true
       );
   },
@@ -30,9 +30,9 @@ const mutations = {
   SetUserAuthenticated(state, isAuth) {
     state.IsUserAuthenticated = isAuth;
   },
-  // DeleteAuthCookie() {
-  //   Vue.cookie.delete("Eshop_Auth_Token");
-  // }
+  DeleteAuthCookie(state , response) {
+    Vue.cookie.delete(response.body.token_name);
+  }
 };
 
 const actions = {
@@ -67,28 +67,37 @@ const actions = {
 
     });
   },
+  CheckForLogin(context , Filter) {
+    if (Vue.cookie.get('UserToken')) {
+      //context.commit("SetUserFullName", response.body.user_name);
+      //context.commit("SetUserAuthenticated", true);
 
-  // CheckForLogin(context) {
-  //   Vue.http.get('Account/CheckAuthentication').then(response => {
-  //     console.log(response);
-  //     if (response.status !== 401 && response.body.status) {
-  //       context.commit("SetUserFullName", response.body.user.name + " " + response.body.user.family);
-  //       context.commit("SetUserAuthenticated", true);
-  //     }
-  //   });
-  // },
+      Vue.http.get('user/loginCheck',{
+        params: {
+          user_id: Filter.user_id
+        }
+      }).then(response => {
+        console.log(response);
+        if (response.status !== 401 && response.body.result == 'OK') {
+          context.commit("SetUserFullName", response.body.user_name);
+          context.commit("SetUserAuthenticated", true);
+        }
+      });
 
-  // SignOutUser(context) {
-  //   Vue.http.get('Account/SignOut').then(response => {
-  //     console.log(response);
-  //     if (response.status !== 401 && response.body.status == "success") {
-  //       context.commit("SetUserFullName", '');
-  //       context.commit("SetUserAuthenticated", false);
-  //       context.commit("DeleteAuthCookie");
-  //       router.push('/Login');
-  //     }
-  //   });
-  // }
+    }
+
+  },
+  SignOutUser(context , userId) {
+    Vue.http.post('user/logout', userId).then(response => {
+      console.log(response);
+      if (response.status !== 401 && response.body.result == "success") {
+        context.commit("SetUserFullName", '');
+        context.commit("SetUserAuthenticated", false);
+        context.commit("DeleteAuthCookie" , response);
+        router.push('/');
+      }
+    });
+  }
 };
 
 export default {

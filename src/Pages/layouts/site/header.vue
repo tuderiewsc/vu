@@ -15,28 +15,35 @@
   <div class="navbar-fixed">
     <nav>
       <div class="nav-wrapper">
-        <router-link to="/">
+       <!--  <router-link to="/">
           <img src="/src/assets/images/logo.png" width="30" height="30">
-        </router-link>
+        </router-link> -->
 
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i>
         </a>
         <ul class="left hide-on-med-and-down">
-          <li class="navitem">
-            <router-link to="/register">ثبت نام</router-link>
-          </li>
-          <li class="navitem">
-            <router-link to="/login">ورود</router-link>
-          </li>
+          <div v-if="IsUserAuthenticated">
+            <li class="not_link">امروز : 25 اسفند 1399</li>
+            <li class="not_link">سلام {{ UserFullName  }}</li>
+            <li class="navitem mr-3"><a v-on:click="SignOutUser()">خروج</a></li>
+          </div>
+          <div v-else>
+            <router-link tag="li" class="navitem" to="/register" active-class="active">
+              <a>ثبت نام</a>
+            </router-link>
+            <router-link tag="li" class="navitem" to="/login" active-class="active">
+              <a>ورود</a>
+            </router-link>
+          </div>
+
         </ul>
         <ul id="nav-mobile" class="right hide-on-med-and-down mr-4">
-          <li class="navitem active">
-            <router-link to="/">
-              <i class="material-icons">home</i>
-            </router-link>
-
-          </li>
-          <li class="navitem"><a href="admin_dash.html">پنل کاربری</a></li>
+          <router-link tag="li" class="navitem" to="/" active-class="active" exact>
+            <a><i class="material-icons">home</i></a>
+          </router-link>
+          <router-link tag="li" class="navitem" to="/dashboard" active-class="active" exact>
+            <a>پنل کاربری</a>
+          </router-link>
           <!-- Dropdown Trigger -->
           <li class="dropdown"><a class="dropdown-trigger" href="#!" data-target="dropdown1">دراپ داون<i class="material-icons left">arrow_drop_down</i></a></li>
         </ul>
@@ -48,6 +55,39 @@
     <li class="dropdown"><a class="dropdown-trigger" href="#!" data-target="dropdown11">دراپ داون<i class="material-icons left">arrow_drop_down</i></a>
     </li>
   </ul>
-</header>
 
+</header>
 </template>
+
+
+<script>
+import Vue from 'vue';
+
+export default {
+  computed: {
+    IsUserAuthenticated() {
+      return this.$store.getters.IsUserAuthenticated;
+    },
+    UserFullName() {
+      return this.$store.getters.GetUserFullName;
+    }
+  },
+  methods: {
+    CheckForLogin() {
+      const userId = {
+        'user_id' : Vue.cookie.get('UserToken')
+      };
+      this.$store.dispatch("CheckForLogin" , userId);
+    },
+    SignOutUser() {
+      const userId = {
+        'user_id' : Vue.cookie.get('UserToken')
+      };
+      this.$store.dispatch("SignOutUser" , userId);
+    }
+  },
+  created() {
+    this.CheckForLogin();
+  }
+};
+</script>
