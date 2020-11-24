@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import Vuelidate from 'vuelidate';
 import VueResource from 'vue-resource';
 import VueCookie from 'vue-cookie';
+import VueMeta from 'vue-meta';
 
 import {store} from './Store/Store';
 import {Routes} from './Routes';
@@ -13,6 +14,9 @@ Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.use(Vuelidate);
 Vue.use(VueCookie);
+Vue.use(VueMeta);
+
+
 
 Vue.http.options.root = "http://localhost:8000/api/";
 Vue.http.interceptors.push((request, next) => {
@@ -41,6 +45,8 @@ export const router = new VueRouter({
 
 
 router.beforeEach((to, from, next) => {
+	window.document.title = to.meta && to.meta.title ? to.meta.title : 'My Vue';
+
 	if (to.name != undefined) {
 		if (to.name.includes('dash') && !Vue.cookie.get('UserToken')) {
 			next({ name: 'home' });

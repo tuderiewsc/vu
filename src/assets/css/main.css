@@ -362,8 +362,14 @@ ul#mobile-demo li a {
 }
 
 .page-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
   padding-top: 0;
   text-align: center;
+  opacity: 0;
 }
 .page-footer p {
   font-family: "Samim", sans-serif, Arial, Helvetica;
@@ -417,6 +423,7 @@ ul#mobile-demo li a {
   bottom: -20px;
   border-radius: 50px;
   background-color: #3F51B5;
+  z-index: 1000;
 }
 .scroll_top_btn:hover {
   background-color: #303F9F;

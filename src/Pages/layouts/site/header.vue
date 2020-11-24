@@ -73,13 +73,13 @@ export default {
   methods: {
     CheckForLogin() {
       const userId = {
-        'user_id' : Vue.cookie.get(this.CookieName)
+        'user_id' : Vue.cookie.get('UserToken')
       };
       this.$store.dispatch("CheckForLogin" , userId);
     },
     SignOutUser() {
       const userId = {
-        'user_id' : Vue.cookie.get(this.CookieName)
+        'user_id' : Vue.cookie.get('UserToken')
       };
       this.$store.dispatch("SignOutUser" , userId);
     }

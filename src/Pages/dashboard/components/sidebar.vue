@@ -7,14 +7,16 @@
 			<p><strong>{{ UserFullName }}</strong></p>
 		</div>
 		<ul class="collapsible">
-			<li>
+			<li class="active">
 				<div class="collapsible-header">
 					<span>سفارشات</span>
-					<i class="material-icons left">add</i>
+					<i class="material-icons left">remove</i>
 				</div>
-				<div class="collapsible-body">
+				<div class="collapsible-body" style="display:block">
 					<a href="list_table.html"><p>لیست سفارشات</p></a>
-					<a href="add_form.html"><p>افزودن سفارش</p></a>
+					<router-link to="/dashboard/orders/add">
+						<p>افزودن سفارش</p>
+					</router-link>
 				</div>
 			</li>
 			<li>

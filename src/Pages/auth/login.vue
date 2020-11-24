@@ -6,6 +6,7 @@
 					<fieldset>
 						<div class="d-flex justify-content-between">
 							<h6>فرم ورود</h6>
+							<h6>{{ title }}</h6>
 						</div>
 					</fieldset>
 					<hr>
@@ -32,6 +33,20 @@
 
 <script>
 export default {
+	metaInfo: {
+		title: 'login page',
+		titleTemplate: '%s | vue-meta Example App',
+		htmlAttrs: {
+			reptilian: 'gator'
+		},
+		headAttrs: {
+			nest: 'eggs'
+		},
+		meta: [
+		{ charset: 'utf-8' },
+		{ name: 'description', content: 'gator' }
+		]
+	},
 	data(){
 		return{
 			email: "",

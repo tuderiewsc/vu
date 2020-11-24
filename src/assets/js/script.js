@@ -1,15 +1,9 @@
-jQuery(window).on('load', function ($) {
-});
-
-
-///////////////////////////////////////////
 jQuery(document).ready(function ($) {
 
-//  M.toast({
-//     html: 'سفارش با موفقیت حذف شد.',
-//     classes: 'info-toast',
-//     displayLength: 300000000
-// });
+
+    setTimeout(function() {
+        $('.page-footer').css('opacity', '1');
+    }, 2000);
 
 
     // Materialize init //
@@ -58,6 +52,9 @@ jQuery(document).ready(function ($) {
     // Materialize init //
 
 
+
+
+
     $('button[type=submit]').click(function(event) {
         $(this).html('<i class="fa fa-circle-o-notch fa-spin"></i>');
     });
@@ -73,6 +70,8 @@ jQuery(document).ready(function ($) {
 
     $('.collapsible li').click(function(event) {
         var liClass = $(this).attr('class');
+        alert('test');
+
         console.log(liClass);
         if (liClass == undefined || liClass == '') {
             $('.collapsible li i').html('add');
@@ -81,6 +80,7 @@ jQuery(document).ready(function ($) {
             $(this).find('i').html('add');
         }
     });
+
 
     $('#sidenav_tr').click(function(event) {
         event.preventDefault();

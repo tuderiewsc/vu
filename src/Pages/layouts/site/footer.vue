@@ -11,6 +11,7 @@
 				</div>
 			</div>
 		</footer>
+
 	</div>
 
 </template>
@@ -18,7 +19,6 @@
 
 <script>
 import Vue from 'vue';
-
 export default {
 	computed: {
 		IsUserAuthenticated() {

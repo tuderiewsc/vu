@@ -1,9 +1,7 @@
 import NotFound from './Pages/404.vue';
-import AddOrder from './Pages/dashboard/orders/addorder.vue';
 
 
 /* Lazy loading  */
-
 var Home = resolve => {
 	require.ensure(['./Pages/home/home.vue'], () => {
 		resolve(require('./Pages/home/home.vue'));
@@ -24,7 +22,11 @@ var Dashboard = resolve => {
 		resolve(require('./Pages/dashboard/dashboard.vue'));
 	});
 };
-
+var AddOrder = resolve => {
+	require.ensure(['./Pages/dashboard/components/orders/addorder.vue'], () => {
+		resolve(require('./Pages/dashboard/components/orders/addorder.vue'));
+	});
+};
 /* Lazy loading  */
 
 
@@ -40,7 +42,11 @@ export const Routes = [
 },
 {
 	path: '/login',
-	component: Login
+	component: Login,
+	// meta: {
+	// 	title:'Login',
+	// 	description:'صفحه ورود'
+	// }
 },
 {
 	path: '/dashboard',

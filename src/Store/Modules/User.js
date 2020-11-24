@@ -14,9 +14,6 @@ const getters = {
   },
   IsUserAuthenticated(state) {
     return state.IsUserAuthenticated;
-  },
-  GetCookieName(state){
-    return state.GetCookieName;
   }
 };
 
@@ -48,7 +45,6 @@ const actions = {
         Swal.fire('ثبت نام موفق', '', 'info');
         router.push('/login');
       }
-      //console.log(response);
     }, data => {
       console.log(data);
     });
@@ -101,7 +97,7 @@ router.push('/dashboard');
 });
   },
   CheckForLogin(context , Filter) {
-    if (Vue.cookie.get(this.CookieName)) {
+    if (Vue.cookie.get('UserToken')) {
       Vue.http.get('user/loginCheck',{
         params: {
           user_id: Filter.user_id
@@ -117,8 +113,12 @@ router.push('/dashboard');
     }
 
   },
-  SignOutUser(context , userId) {
-    Vue.http.post('user/logout', userId).then(response => {
+  SignOutUser(context , filter) {
+    Vue.http.get('user/logout', {
+      params: {
+        user_id: filter.user_id
+      }
+    }).then(response => {
       console.log(response);
       if (response.status !== 401 && response.body.result == "success") {
         context.commit("SetUserFullName", '');
